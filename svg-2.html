@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style lang="css">
+        svg line {
+            stroke：red;
+        }
+
+        .arrow-line {
+            stroke-dasharray: 60;
+            stroke-dashoffset: 60;
+            transition: stroke-dashoffset ease-in .5s .2s;
+        }
+
+        .arrow-head {
+            stroke-dasharray: 9;
+            stroke-dashoffset: -9;
+            transition: stroke-dashoffset ease-in .2s;
+        }
+
+        svg:hover line {
+            stroke-dashoffset: 0;
+        }
+
+        svg:hover .arrow-line {
+            transition: stroke-dashoffset ease-in .5s;
+        }
+
+        svg:hover .arrow-head {
+            transition: stroke-dashoffset ease-in .2s .5s;
+        }
+
+
+        #ddd {
+            stroke-dasharray: 10;
+            stroke-dashoffset: 0;
+            animation: dash 2s linear infinite;
+        }
+
+        @keyframes dash {
+            to {
+                stroke-dashoffset: 600;
+            }
+        }
+
+        .text {
+            fill: freeze;
+            stroke-width: 1;
+            stroke-dasharray: 0 300;
+            stroke-dashoffset: 0;
+        }
+
+        .text:nth-child(3n + 1) {
+            stroke: #F60A0A;
+            animation: stroke 3s ease;
+        }
+
+
+        @keyframes stroke {
+            100% {
+                stroke-dashoffset: 1000;
+                stroke-dasharray: 80 160;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <svg viewBox="0 0 200 300">
+        <line x1="0" class="arrow-line" y1="6.2" x2="59.6" y2="6.2" stroke="red"></line>
+        <line x1=" 54.7 " class="arrow-head" y1="0.7 " x2="60.5 " y2="6.5 " stroke="red"></line>
+        <line x1="54.7 " class="arrow-head" y1="11.7 " x2="60.5 " y2="5.8 " stroke="red"></line>
+
+
+        <!-- <rect x="-10" y="-10" width="20" height="20" style="fill: #ff9; stroke: black;">
+            <animateTransform attributeType="XML" attributeName="transform" type="scale" from="1" to="4 2" begin="0s" dur="4s" fill="freeze"
+            />
+        </rect>
+
+        <g>
+            <rect x="0" y="0" width="30" height="30" style="fill: #ccc;" />
+            <circle cx="30" cy="30" r="15" style="fill: #cfc; stroke: green;" />
+            <animateMotion from="0,0" to="60,30" dur="4s" fill="freeze" />
+        </g> -->
+
+
+        <!-- <path d="M10,110 A120,120 -45 0,1 110 10 A120,120 -45 0,1 10,110" stroke="lightgrey" stroke-width="2" fill="none" id="theMotionPath"
+        />
+        <circle cx="10" cy="110" r="3" fill="lightgrey" />
+        <circle cx="110" cy="10" r="3" fill="lightgrey" />
+
+        <circle cx="" cy="" r="15" fill="red">
+            <animateMotion dur="6s" repeatCount="indefinite">
+                <mpath xlink:href="#theMotionPath" />
+            </animateMotion>
+        </circle> -->
+
+
+        <rect x="0" y="0" width="130" height="130" style="fill:none;" id="theMotionPath1" stroke="black" stroke-width="1" />
+        <circle cx="" cy="" r="15" fill="red">
+            <animateMotion dur="6s" repeatCount="indefinite">
+                <mpath xlink:href="#theMotionPath1" />
+            </animateMotion>
+        </circle>
+
+        <!-- <path d="m10,10v50h50v50h50v-50h-50v-50h-50z" fill="none" stroke="lightblue" id="ddd" stroke-width="2" stroke-dasharray="10"
+            stroke-dashoffset="0">
+        </path> -->
+
+    </svg>
+</body>
+
+</html>
