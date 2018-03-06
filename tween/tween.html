@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/tween.js/r14/Tween.min.js"></script>
+</head>
+
+<body>
+    <script>
+        var box = document.createElement('div');
+        box.style.setProperty('background-color', '#008800');
+        box.style.setProperty('width', '100px');
+        box.style.setProperty('height', '100px');
+        document.body.appendChild(box);
+
+        function animate(time) {
+            requestAnimationFrame(animate);
+            TWEEN.update(time);
+        }
+        requestAnimationFrame(animate);
+
+        var coords = {
+            x: 0,
+            y: 0
+        };
+
+        var tween = new TWEEN.Tween(coords)
+            .to({
+                x: 300,
+                y: 200
+            }, 1000)
+            .easing(TWEEN.Easing.Quadratic.Out)
+            .onUpdate(function () {
+                box.style.setProperty('transform', 'translate(' + coords.x + 'px,' + coords.y + 'px)');
+            })
+            .start()
+            .delay(1000)
+            .repeat(10);
+    </script>
+</body>
+
+</html>

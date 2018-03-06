@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box {
+            margin: 10px;
+            width: 100px;
+            height: 100px;
+            background: #7C9DD4;
+            box-shadow: 5px 5px 0px #D1D1D1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+
+    <script src="https://cdn.bootcss.com/move.js/0.5.0/move.js"></script>
+    <script>
+        move('.box')
+            .set('background-color', 'red')
+            .x(500)
+            .then()
+            .y(400)
+            .set('background-color', 'green')
+            .to(500, 200)
+            .rotate(180)
+            .scale(.5)
+            .set('background-color', '#FF0551')
+            .set('border-color', 'black')
+            .duration('3s')
+            .skew(50, -10)
+            .then()
+            .duration('0.3s')
+            .scale(3)
+            .pop()
+            .end();
+    </script>
+</body>
+
+</html>
