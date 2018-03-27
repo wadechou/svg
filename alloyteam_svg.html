@@ -7,43 +7,46 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
-        /*Other styles */
-        html, body {
-            height: 100%;
-        }
+/*Other styles */
+html, body {
+    height: 100%;
+}
 
-        body {
-            background: #212121;
-            background-size: .2em 100%;
-            font: 14.5em/1 Open Sans, Impact;
-            text-transform: uppercase;
-            margin: 0;
-        }
+body {
+    background: #212121;
+    background-size: .2em 100%;
+    font: 14.5em/1 Open Sans, Impact;
+    text-transform: uppercase;
+    margin: 0;
+}
 
-        svg {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-        }
+svg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
 
 
         .text {
             stroke-dasharray: 0 300;
-            fill: gray;
+            fill: black;
             stroke-dashoffset: 100;
             stroke-width: 5;
         }
         .text:nth-child(3n + 1) {
             stroke: #F60A0A;
-            animation: stroke 6s ease-in-out forwards;
+            fill: blue;
+            animation: Parabola 2s ease-in-out forwards;
         }
         .text:nth-child(3n + 2) {
             stroke: #F2FF14;
             animation: stroke1 6s ease-in-out forwards;
+            fill-opacity: .5;
         }
         .text:nth-child(3n + 3) {
             stroke: #FB9505;
             animation: stroke2 6s ease-in-out forwards;
+            fill-opacity: .5;
         }
 
         @keyframes stroke {
@@ -68,10 +71,40 @@
             }
         }
         
+        @keyframes Parabola{
+            20%{
+                transform: matrix(1,0,0,1,20,-20);
+            }
+            100%{
+                transform: matrix(1,0,0,1,45,-34.4);
+            }
+        }
+
         .text-path {
             font-size: 0.1em;
         }
+        
+        .circle-loading {
+            fill: none;
+            stroke:#F2FF14;
+            stroke-dasharray:10% 90%;
+            stroke-width: 5;
+            animation: circle 2s ease-in-out infinite;
+            
+            stroke-opacity: 0.2;
+        }
+        #circle {
+            transform: translate(400px,0);
+        }
 
+        @keyframes circle {
+            100%  {
+                transform: rotate(80deg);
+                stroke-dasharray:50% 50%;
+                stroke-opacity: 1;
+            }
+            
+        }
 
     </style>
 </head>
@@ -86,6 +119,9 @@
                 <mpath xlink:href="#theMotionPath"/>
             </animateMotion>
         </circle>
+
+        <circle cx="" cy="0" r="100" class="circle-loading"> </circle>
+
 
 
         
@@ -116,6 +152,9 @@
                 Making a quick turn    
             </textPath>
         </text>
+
+
+
             
     </svg>
 </body>
