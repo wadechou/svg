@@ -1,0 +1,191 @@
+<html>
+<head>
+	<title>asdf</title>
+	<meta charset="utf-8">
+	<style type="text/css">
+	body{padding: 0; margin: 0; background: lightgreen}
+	</style>
+		<script type="text/javascript">
+			window.onload = function(){
+		 	    var myCanvas = document.getElementById("myCanvas");
+		 	    	// myCanvas.width = "800"
+				    // myCanvas.height = "600"
+				    myCanvas.context = ''
+
+		 	    if (!myCanvas.getContext) {
+		 	        alert("Your browser does not support the canvas element.");
+		 	    } else {
+		 	    	var myContext = myCanvas.getContext("2d");
+		 	    	var myContext1 = myCanvas.getContext("2d");
+
+
+		 	    	// though use diff name will not work
+		 	    	// it's the same context
+		 	    	myContext1.beginPath();
+		 	        myContext1.moveTo(200, 150);
+		 	        myContext1.lineTo(300, 115);
+		 	        myContext1.lineTo(200, 80);
+		 	        myContext1.lineTo(200, 150);
+			 	        myContext1.strokeStyle = "#333";
+			 	        myContext1.lineWidth = 18;
+		 	        myContext1.closePath();
+		 	        myContext1.stroke();
+
+
+
+		 	        	myContext.fillStyle = "rgb(200,0,0)";
+		 	        	myContext.strokeStyle = "yellow";
+			 	        myContext.lineWidth = 2;
+		 	        myContext.fillRect(10, 10, 55, 50);
+		 	        myContext.fillRect(100, 0, 150, 50);
+		 	        myContext.strokeRect(100, 60, 150, 50);
+		 	        myContext.clearRect(130, 10, 90, 30);
+		 	        
+
+
+
+			 	        myContext.beginPath();//1
+		 	        myContext.moveTo(30, 30);
+		 	        myContext.lineTo(150, 30);
+		 	        myContext.lineTo(150, 120);
+		 	        myContext.lineTo(90, 100);
+		 	        myContext.lineTo(120, 60);
+		 	        myContext.lineTo(30, 30);
+			 	        myContext.fillStyle = 'red';
+			 	        myContext.strokeStyle = 'blue';
+			 	        myContext.lineWidth = 2;
+		 	        	myContext.stroke();
+		 	        	myContext.fill();
+		 	        	myContext.closePath();// 2
+
+		 	        // if no sentence , 2 will not work. the next line will connected to before line
+		 	        // bcase between 1 & 3. will be a block
+		 	        myContext.beginPath(); //4
+		 	        myContext.arc(150, 120, 120,  Math.PI/2, Math.PI*2, true);
+		 	        myContext.closePath();
+		 	        	myContext.fillStyle = 'green';
+		 	        	myContext.strokeStyle = 'blue';
+		 	        myContext.fill();
+				    myContext.stroke();//3
+
+
+				    	myContext.strokeStyle='rgb(0,0,0)';
+				      lashes(myContext,198, 170, 193, 185);
+					  lashes(myContext,208, 177, 204, 193);
+					  lashes(myContext,220, 180, 220, 195);
+					  lashes(myContext,232, 177, 236, 193);
+					  lashes(myContext,242, 170, 247, 185);
+				    myContext.stroke();
+
+
+				    function lashes(cntx,x1,y1,x2,y2) {
+					  cntx.moveTo(x1,y1);
+					  cntx.lineTo(x2,y2);
+					}
+
+					myContext.beginPath();
+					myContext.lineWidth = 5;
+					// myContext.moveTo(80, 120);
+					myContext.bezierCurveTo(140, 320, 240, 500, 340, 320);
+					myContext.closePath();
+					myContext.fill();
+
+
+					// font
+					myContext.font = 'italic normal bold 2em/4em sans-serif';
+					myContext.fillStyle='#f00';
+					myContext.fillText('good good!',20, 480);
+
+
+					// img
+					drawImg(1, 400, 100);
+					drawImg(2, 400, 300);
+
+					function drawImg(n, x, y) {
+						var imageObj = new Image();
+						imageObj.src = n+".png";
+						imageObj.fiter = ''
+						imageObj.onload = function(){
+							myContext.fillStyle="ffffff";
+							// myContext.fillRect(400,100,400,100);
+							myContext.drawImage(imageObj,x,y);
+						};
+					}
+
+
+
+					// arc
+					myContext.lineWidth = 1;
+					ParamEllipse(myContext, 300, 300, 150, 50);
+					function ParamEllipse(context, x, y, a, b)
+					{
+					   //max是等于1除以长轴值a和b中的较大者
+					   //i每次循环增加1/max，表示度数的增加
+					   //这样可以使得每次循环所绘制的路径（弧线）接近1像素
+					   var step = (a > b) ? 1 / a : 1 / b;
+					   context.beginPath();
+					   context.moveTo(x + a, y); //从椭圆的左端点开始绘制
+					   for (var i = 0; i < 2 * Math.PI; i += step)
+					   {
+					      //参数方程为x = a * cos(i), y = b * sin(i)，
+					      //参数为i，表示度数（弧度）
+					      context.lineTo(x + a * Math.cos(i), y + b * Math.sin(i));
+					   }
+					   context.closePath();
+					   context.stroke();
+					};
+
+
+					EvenCompEllipse(myContext, 300, 300, 200, 50);
+					function EvenCompEllipse(context, x, y, a, b)
+					{
+					   context.save();
+					   //选择a、b中的较大者作为arc方法的半径参数
+					   var r = (a > b) ? a : b; 
+					   var ratioX = a / r; //横轴缩放比率
+					   var ratioY = b / r; //纵轴缩放比率
+					   context.scale(ratioX, ratioY); //进行缩放（均匀压缩）
+					   context.beginPath();
+					   //从椭圆的左端点开始逆时针绘制
+					   context.moveTo((x + a) / ratioX, y / ratioY);
+					   context.arc(x / ratioX, y / ratioY, r, 0, 2 * Math.PI);
+					   context.closePath();
+					   context.stroke();
+					   context.restore();
+					};
+
+
+					BezierEllipse1(myContext, 300, 300, 230, 50);
+					function BezierEllipse1(context, x, y, a, b)
+					{
+					   //关键是bezierCurveTo中两个控制点的设置
+					   //0.5和0.6是两个关键系数（在本函数中为试验而得）
+					   var ox = 0.5 * a,
+					       oy = 0.6 * b;
+
+					   context.save();
+					   context.translate(x, y);
+					   context.beginPath();
+					   //从椭圆纵轴下端开始逆时针方向绘制
+					   context.moveTo(0, b); 
+					   context.bezierCurveTo(ox, b, a, oy, a, 0);
+					   context.bezierCurveTo(a, -oy, ox, -b, 0, -b);
+					   context.bezierCurveTo(-ox, -b, -a, -oy, -a, 0);
+					   context.bezierCurveTo(-a, oy, -ox, b, 0, b);
+					   context.closePath();
+					   context.stroke();
+					   context.restore();
+
+					};
+
+					// myContext.clearRect(0, 0, 510, 510);
+
+		 	    }
+		 	}
+		</script>
+</head>
+<body>
+		<!-- width 和height不能写到style里，否则会被拉伸 -->
+		<canvas id="myCanvas" width=800 height=600; style="border:2px gray solid">your browser does not support the canvas tag </canvas>
+</body>
+</html>

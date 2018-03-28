@@ -28,7 +28,7 @@
 </head>
 <body>
     <!-- https://www.tuicool.com/articles/VVv2Avq -->
-    
+    <!-- http://jorgeatgu.github.io/svg-filters/ -->
     <svg width=1000 height=1000>
         <circle class="circle" r=100 cx=300 cy=300 >
 
@@ -47,12 +47,12 @@
         
         <!-- filter -->
         <filter id="shadow">
-            <feImage result="bg" xlink:href="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522047087428&di=8ed7cadae21c4e0922ec009c47587bb1&imgtype=0&src=http%3A%2F%2Fpic4.nipic.com%2F20090824%2F2418879_124852009101_2.jpg"></feImage>
-            <feComponentTransfer in="bg" result="bg">
+            <feImage preserveAspectRatio="none" result="bg" xlink:href="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522047087428&di=8ed7cadae21c4e0922ec009c47587bb1&imgtype=0&src=http%3A%2F%2Fpic4.nipic.com%2F20090824%2F2418879_124852009101_2.jpg"></feImage>
+            <!-- <feComponentTransfer in="bg" result="bg">
                 <feFuncR type="linear" slope="1" intercept="0.3"></feFuncR>
                 <feFuncG type="linear" slope="1" intercept="0.1"></feFuncG>
                 <feFuncB type="linear" slope="1" intercept="0.6"></feFuncB>
-            </feComponentTransfer>
+            </feComponentTransfer> -->
             <!-- <feColorMatrix type="matrix" result="color" values="
             0 0 0 0 0
             0 0 0 0.9 0

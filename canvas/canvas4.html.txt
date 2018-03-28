@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>xxx</title>
+	<style>
+	body{background-color: lightblue;}
+	#ca{
+		border:2px #333 solid;
+	}
+	</style>
+</head>
+<body>
+	<canvas id="ca">不支持canvas</canvas>
+	<canvas>
+	<script>
+	window.onload = function(){
+		var ca = document.getElementById('ca');
+		ca.width = 800;
+		ca.height = 800;
+
+		var cxt = ca.getContext('2d');
+		cxt.fillStyle = "red";
+		cxt.shadowColor = '#058';
+		cxt.shadowOffsetX = 10;
+		cxt.shadowOffsetY = 10;
+		// cxt.shadowBlur = 10;
+		cxt.strokeStyle = "#058";
+		cxt.lineWidth = 6;
+
+		cxt.beginPath();
+		cxt.arc(400, 400, 300, 0, Math.PI * 2, false);
+		cxt.arc(600, 400, 150, 0, Math.PI * 2, true);
+		cxt.closePath();
+
+		cxt.fill();
+
+
+
+	}
+	</script>
+</body>
+</html>

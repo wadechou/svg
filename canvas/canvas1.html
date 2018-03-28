@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>xxx</title> 
+	<style>
+	#ca{
+		border:2px #333 solid;
+	}
+	</style>
+</head>
+<body>
+	<canvas id="ca">不支持canvas</canvas>
+	<canvas>
+	<script>
+	window.onload = function(){
+		var ca = document.getElementById('ca');
+		ca.width = 800;
+		ca.height = 800;
+
+		var cxt = ca.getContext('2d');
+		cxt.fillStyle = "red";
+		cxt.strokeStyle = "#058";
+		cxt.lineWidth = 6;
+
+// var linerGrad = cxt.createLinearGradient(0,0,800,0);
+// 		linerGrad.addColorStop(0.0,'#fff');
+// 		linerGrad.addColorStop(1,'blue');
+// 		cxt.fillStyle = linerGrad;	
+// 		cxt.fillRect( 0, 0, 800, 600);
+
+	cxt.save();	
+	cxt.translate(75, 75);
+	cxt.rotate(45 * Math.PI/180);
+	cxt.fillRect(-25, -25, 50, 50);
+	cxt.restore();
+
+
+
+		cxt.save();
+		cxt.translate(300, 100);
+		cxt.rotate(45*Math.PI/180);
+		cxt.transform(1,0.3, 0.3, 1, 0, 0);
+		cxt.fillRect( 0, 0, 200, 200);
+		cxt.strokeRect(0, 0, 200, 200);
+		cxt.restore();
+
+
+		cxt.save();
+		cxt.translate(10, 10);
+		cxt.rotate(-20*Math.PI/180);
+		cxt.scale(3, 3);
+		cxt.lineTo(100, 100);
+		cxt.lineTo(200, 300);
+		cxt.stroke();
+		cxt.restore();
+
+		cxt.beginPath();
+		// cxt.moveTo(100, 100);
+		cxt.lineTo(100, 300);
+		cxt.lineTo(300, 200);
+		cxt.strokeStyle="red";
+		cxt.stroke();
+		cxt.closePath();
+	}
+	</script>
+</body>
+</html>

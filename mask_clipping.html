@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style lang="text/css">
+        svg:hover .line {
+            stroke-dashoffset: 10px;
+        }
+        .line {
+            stroke: #333;
+            stroke-width: 9px;
+            stroke-dasharray: 100px;
+            stroke-dashoffset: 100px;
+            transition: stroke-dashoffset .5s cubic-bezier(.79,0,.58,.95);
+        }
+    </style>
+</head>
+<body>
+    <svg>
+        <defs>
+            <clipPath id="cliping"></clipPath>
+            <mask id="mask" maskUnits="userSpaceOnUse" x="0" y="0" width="60" height="60">
+                <g fill="#fff">
+                    <rect x="0" y="0" width="6" height="60"></rect>
+                    <rect x="9" y="0" width="6" height="60"></rect>
+                    <rect x="18" y="0" width="6" height="60"></rect>
+                    <rect x="27" y="0" width="6" height="60"></rect>
+                    <rect x="36" y="0" width="6" height="60"></rect>
+                    <rect x="45" y="0" width="6" height="60"></rect>
+                    <rect x="54" y="0" width="6" height="60"></rect>
+                </g>
+            </mask>
+            <mask id="mask1" maskUnits="userSpaceOnUse" x="0" y="0" width="60" height="60">
+                <circle cx=30 cy=30 r=30 fill="#fff"></circle>
+            </mask>
+        </defs>
+
+        <!-- <circle clip-path="url(#cliping)"></circle> -->
+        <g mask="url(#mask1)">
+            <circle mask="url(#mask)" cx=30 cy=30 r=30 fill="blue"></circle>
+            <line x1="0" y1="0" x2="0" y2="60" class="line"></line>
+            <line x1="12" y1="0" x2="12" y2="60" class="line"></line>
+            <line x1="24" y1="0" x2="24" y2="60" class="line"></line>
+            <line x1="36" y1="0" x2="36" y2="60" class="line"></line>
+        </g>
+    </svg>
+</body>
+</html>
