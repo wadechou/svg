@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>canvas drawImage</title>
+  <style>
+    html, body {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+  <script>
+    (function(window, document) {
+      var imgurl = './to.png';
+      var imgurl2 = './img.png';
+      var imgurl3 = './word.png';
+      var imgurl4 = './erweima.png';
+      var SIZE = {};
+      var canvas = document.getElementById('canvas');
+      var context = canvas.getContext('2d');
+
+      // 获取浏览器大小
+      function getSIZE() {
+        var winW = document.body.clientWidth;
+        var winH = document.body.clientHeight;
+        var ratio = (winW * 2 / 750).toFixed(3);
+
+        SIZE = {
+          winW,
+          winH,
+          ratio,
+          canvasW: winW * 2,
+          canvasH: winH * 2,
+        };
+      }
+
+      // 创建画布
+      function initCanvas() {
+        getSIZE();
+        canvas.width = SIZE.canvasW;
+        canvas.height = SIZE.canvasH;
+        canvas.style.width = SIZE.winW + 'px';
+        canvas.style.height = SIZE.winH + 'px';
+        drawImage();
+      }
+
+      // 绘制图片
+      function drawImage() {
+        context.fillStyle = '#2A6974';
+        context.fillRect(0, 0, SIZE.canvasW, SIZE.canvasH);
+
+        // to文字
+        var p1 = () => {
+          return new Promise((resolve, reject) => {
+            var img = new Image();
+            img.onload = () => {
+              var rat = img.width / img.height;
+              var h = Math.floor(SIZE.winW / rat);
+              var b = SIZE.winH - h;
+              context.drawImage(img, 0, 0, img.width, img.height, 56, 60,
+                          img.width * SIZE.ratio, img.height * SIZE.ratio);
+
+              drawText(img.width * SIZE.ratio + 56, 65);
+              resolve();
+            };
+            img.src = imgurl;
+          });
+        };
+
+        // 说明文字
+        var p2 = () => {
+          return new Promise((resolve, reject) => {
+            var img = new Image();
+            img.onload = () => {
+              var h =  img.height * SIZE.ratio;
+              var ch =  SIZE.canvasH / 2;
+              var tmp = (ch - h) / 2;
+
+              context.drawImage(img, 0, 0, img.width, img.height, 255  * SIZE.ratio,
+                  tmp * 1.5, img.width * SIZE.ratio, img.height * SIZE.ratio);
+
+              resolve();
+            };
+            img.src = imgurl3;
+          });
+        };
+
+        // 二维码
+        var p4 = () => {
+          return new Promise((resolve, reject) => {
+            var img = new Image();
+            img.onload = () => {
+              var h = img.height;
+
+              context.drawImage(img, 0, 0, img.width, img.height, 537  * SIZE.ratio,
+                    (SIZE.canvasH - (img.height + 30) * SIZE.ratio),
+                    img.width * SIZE.ratio, img.height * SIZE.ratio);
+              resolve();
+            };
+            img.src = imgurl4;
+          });
+        };
+
+        // 底边图片
+        var p3 = () => {
+          return new Promise((resolve, reject) => {
+            var img = new Image();
+            img.onload = () => {
+              var h = img.height;
+              var r = img.width / h;
+              var ch = SIZE.canvasH / 2;
+              var rh = SIZE.canvasW / r;
+              var tmp = ch > rh ? rh : ch;
+
+              context.drawImage(img, 0, 0, img.width, img.height, 0,
+                          SIZE.canvasH - tmp, SIZE.canvasW, img.height * SIZE.ratio);
+
+              resolve(p4());
+            };
+            img.src = imgurl2;
+          });
+        };
+
+        return Promise.all([p1(), p2(), p3()]);
+      }
+
+      // 画文字
+      function drawText(l, t) {
+        context.fillStyle = 'rgb(238, 243, 244)';
+        context.font = `${36 * SIZE.ratio}px '微软雅黑','宋体'`;
+        context.textBaseline = 'top';
+        context.fillText('王祖贤', l, t);
+        context.stroke();
+      }
+      
+      initCanvas();
+    })(window, document, undefined);
+  </script>
+</body>
+</html>
